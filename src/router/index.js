@@ -24,7 +24,7 @@ const mis_rutas = [
 ];
 
 export const routes =createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/App-Vue-Clase4/'),
   routes: mis_rutas
 });
 
