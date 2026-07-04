@@ -4,5 +4,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [vue(),tailwindcss(),],
- base: '/App-vue-clase4/',
+ base: import.meta.env.BASE_URL,
 })

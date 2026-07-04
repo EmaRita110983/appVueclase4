@@ -23,8 +23,8 @@ const mis_rutas = [
 
 ];
 
-export const routes =createRouter({
-  history: createWebHistory('/App-Vue-Clase4/'),
+export const routes = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: mis_rutas
-});
+})
 
