@@ -32,7 +32,7 @@
               placeholder="Ej: 1200.00" />
           </div>
           <div>
-            <label for="imagen" class="block text-sm font-medium text-gray-700">URL de la Imagen:</label>
+            <label for="imagen" class="block text-sm font-medium text-gray-700" width="100%">URL de la Imagen:</label>
             <input type="text" id="imagen" v-model="producto.imagen"
               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Ej: https://ejemplo.com/imagen.jpg" />
@@ -109,7 +109,10 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 
-const productos = ref([]);
+const productos = ref(JSON.parse(localStorage.getItem('productos')) || []);
+const guardarEnStorage = () => {
+  localStorage.setItem('productos', JSON.stringify(productos.value))
+}
 const indiceEditar = ref(-1);
 const producto = ref({
   nombre: '',
@@ -125,31 +128,33 @@ onMounted(() => {
 
 function guardarProducto() {
 
-  if (!producto.value.nombre ||
+  if (
+    !producto.value.nombre ||
     producto.value.stock < 0 ||
-    producto.value.precio < 0) {
-
+    producto.value.precio < 0
+  ) {
     alert("Complete correctamente los campos.");
     return;
   }
 
   if (indiceEditar.value === -1) {
 
-    // Agregar
+    // AGREGAR
     productos.value.push({ ...producto.value });
 
     alert("Producto agregado correctamente.");
 
   } else {
 
-    // Editar
+    // EDITAR
     productos.value[indiceEditar.value] = { ...producto.value };
-
-    indiceEditar.value = -1;
 
     alert("Producto actualizado.");
 
+    indiceEditar.value = -1;
   }
+
+  guardarEnStorage();
 
   producto.value = {
     nombre: "",
@@ -157,21 +162,18 @@ function guardarProducto() {
     precio: 0,
     imagen: ""
   };
-
 }
+
+
 function editarProducto(index) {
-
   producto.value = { ...productos.value[index] };
-
   indiceEditar.value = index;
-
 }
 function eliminarProducto(index) {
 
   if (confirm("¿Desea eliminar este producto?")) {
-
     productos.value.splice(index, 1);
-
+    guardarEnStorage();
   }
 
 }
