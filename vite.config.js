@@ -3,6 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [vue(),tailwindcss(),],
- base: import.meta.env.BASE_URL,
+  plugins: [
+    vue(),
+    tailwindcss()
+  ],
+  base: '/appVueclase4/',
 })
