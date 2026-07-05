@@ -37,6 +37,13 @@
             Productos
           </RouterLink>
 
+          <RouterLink
+            to="/blog"
+            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
+            active-class="bg-indigo-600 text-white shadow-lg">
+            Blog
+          </RouterLink>
+
         </div>
 
       </div>
