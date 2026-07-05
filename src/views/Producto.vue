@@ -57,7 +57,7 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          <div v-for="(prod, index) in productos" :key="index"
+          <div v-for="(prod, index) in productosFiltrados" :key="index"
             class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden">
 
             <img :src="prod.imagen" :alt="prod.nombre" class="w-full h-48 object-contain" />

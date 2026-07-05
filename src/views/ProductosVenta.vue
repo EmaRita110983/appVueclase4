@@ -5,12 +5,21 @@
       🛍️ Productos a la Venta
     </h1>
 
+    <div class="max-w-md mx-auto mb-10">
+  <input
+    v-model="buscar"
+    type="text"
+    placeholder="🔍 Buscar producto..."
+    class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+</div>
+
     <div
       class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
     >
 
       <div
-        v-for="(producto, index) in productos"
+        v-for="(producto, index) in productosFiltrados"
         :key="index"
         class="bg-white rounded-2xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl hover:-translate-y-2"
       >
@@ -73,9 +82,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const productos = ref([])
+const buscar = ref('')
+
+const productosFiltrados = computed(() => {
+  return productos.value.filter(prod =>
+    prod.nombre.toLowerCase().includes(buscar.value.toLowerCase())
+  )
+})
 
 onMounted(() => {
   productos.value = JSON.parse(localStorage.getItem('productos')) || []
