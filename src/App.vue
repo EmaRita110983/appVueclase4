@@ -10,7 +10,7 @@
         <RouterLink
           to="/"
           class="text-3xl font-extrabold tracking-wide text-white">
-          Mi<span class="text-indigo-400">Aplicación</span>
+          HM<span class="text-indigo-400">Technologies</span>
         </RouterLink>
 
         <!-- Menú -->
@@ -67,7 +67,7 @@
       <div class="max-w-7xl mx-auto flex justify-between items-center">
 
         <h2 class="font-bold text-white">
-          Mi<span class="text-indigo-400">Aplicación</span>
+          HM<span class="text-indigo-400">Technologies</span>
         </h2>
 
         <p>
