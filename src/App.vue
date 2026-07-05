@@ -14,7 +14,7 @@
         </RouterLink>
 
         <!-- Menú -->
-        <div class="flex gap-4">
+        <div class="flex gap-4 ">
 
           <RouterLink
             to="/"
@@ -42,6 +42,13 @@
             class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
             active-class="bg-indigo-600 text-white shadow-lg">
             Blog
+          </RouterLink>
+
+          <RouterLink
+            to="/productos-venta"
+            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
+            active-class="bg-indigo-600 text-white shadow-lg">
+            Productos a la venta
           </RouterLink>
 
         </div>
