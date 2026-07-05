@@ -29,7 +29,7 @@ const mis_rutas = [
 ];
 
 export const routes = createRouter({
-  history: createWebHashHistory(appVueclase4),
+  history: createWebHashHistory('/appVueclase4/'),
   routes: mis_rutas
 })
 
