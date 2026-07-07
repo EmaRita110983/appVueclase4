@@ -3,9 +3,10 @@ import Producto from '../views/Producto.vue'
 import Login from '../views/Login.vue'
 import Carrito from '../views/Carrito.vue'
 import Blog from '../views/Blog.vue'
+import NoFoundComponent from '../views/errors/NoFoundComponent.vue'
 import ProductosVenta from '../views/ProductosVenta.vue'
 
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const mis_rutas = [
   {
@@ -37,10 +38,12 @@ const mis_rutas = [
   path: '/carrito',
   name: 'Carrito',
   component: Carrito
-}
-]
+},
+{path: '/:pathMatch(.*)*', component: NoFoundComponent}
+
+];
 
 export const routes = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: mis_rutas
 });
