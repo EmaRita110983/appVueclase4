@@ -1,5 +1,5 @@
 import Inicio from '../views/Inicio.vue'
-import Producto from '../views/Producto.vue'
+import Producto from '../views/Productos.vue'
 import Login from '../views/Login.vue'
 import Carrito from '../views/Carrito.vue'
 import Blog from '../views/Blog.vue'

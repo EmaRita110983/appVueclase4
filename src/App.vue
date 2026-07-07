@@ -45,7 +45,7 @@
           to="/producto"
           class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
         >
-          Gestión de Productos
+          Productos
         </RouterLink>
 
         <RouterLink
@@ -89,7 +89,7 @@
       </RouterLink>
 
       <RouterLink @click="menuAbierto=false" to="/producto" class="text-white">
-        Gestión de Productos
+        Productos
       </RouterLink>
 
       <RouterLink @click="menuAbierto=false" to="/productos-venta" class="text-white">
