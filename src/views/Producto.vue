@@ -57,10 +57,11 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          <div v-for="(prod, index) in productosFiltrados" :key="index"
+          <div v-for="(prod, index) in productos" :key="index"
             class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden">
 
-            <img :src="prod.imagen" :alt="prod.nombre" class="w-full h-48 object-contain" />
+            <img :src="prod.imagen || 'https://placehold.co/400x300?text=Sin+Imagen'" :alt="prod.nombre"
+              class="w-full h-48 object-contain" />
 
             <div class="p-6">
 
@@ -70,7 +71,7 @@
 
               <p class="text-gray-600">
                 💲 Precio:
-                <strong>${{ prod.precio.toFixed(2) }}</strong>
+                <strong>${{ Number(prod.precio).toFixed(2) }}</strong>
               </p>
 
               <p class="text-gray-600 mt-2">

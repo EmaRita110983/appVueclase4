@@ -1,6 +1,7 @@
 import Inicio from '../views/Inicio.vue'
 import Producto from '../views/Producto.vue'
 import Login from '../views/Login.vue'
+import Carrito from '../views/Carrito.vue'
 import Blog from '../views/Blog.vue'
 import ProductosVenta from '../views/ProductosVenta.vue'
 
@@ -31,7 +32,12 @@ const mis_rutas = [
     path: '/productos-venta',
     name: 'ProductosVenta',
     component: ProductosVenta
-  }
+  },
+  {
+  path: '/carrito',
+  name: 'Carrito',
+  component: Carrito
+}
 ]
 
 export const routes = createRouter({

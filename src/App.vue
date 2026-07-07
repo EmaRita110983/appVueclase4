@@ -7,49 +7,44 @@
       <div class="max-w-7xl mx-auto h-20 px-8 flex justify-between items-center">
 
         <!-- Logo -->
-        <RouterLink
-          to="/"
-          class="text-3xl font-extrabold tracking-wide text-white">
+        <RouterLink to="/" class="text-3xl font-extrabold tracking-wide text-white">
           HM<span class="text-indigo-400">Technologies</span>
         </RouterLink>
 
         <!-- Menú -->
         <div class="flex gap-4 ">
 
-          <RouterLink
-            to="/"
+          <RouterLink to="/"
             class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
             active-class="bg-indigo-600 text-white shadow-lg">
             Inicio
           </RouterLink>
 
-          <RouterLink
-            to="/login"
+          <RouterLink to="/login"
             class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
             active-class="bg-indigo-600 text-white shadow-lg">
             Login
           </RouterLink>
 
-          <RouterLink
-            to="/producto"
+          <RouterLink to="/producto"
             class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
             active-class="bg-indigo-600 text-white shadow-lg">
             Productos
           </RouterLink>
 
-          <RouterLink
-            to="/blog"
+          <RouterLink to="/blog"
             class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
             active-class="bg-indigo-600 text-white shadow-lg">
             Blog
           </RouterLink>
 
-          <RouterLink
-            to="/productos-venta"
+          <RouterLink to="/productos-venta"
             class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
             active-class="bg-indigo-600 text-white shadow-lg">
             Productos a la venta
           </RouterLink>
+
+          
 
         </div>
 
@@ -90,4 +85,7 @@
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+//import { useCarrito } from './store/carrito'
+
+//const { carrito } = useCarrito()
 </script>

@@ -1,99 +1,169 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-100 via-gray-100 to-indigo-100 py-10">
+  <div class="min-h-screen bg-gradient-to-br from-slate-100 via-gray-100 to-indigo-100 py-10 px-6">
+    <div class="max-w-7xl mx-auto">
 
-    <h1 class="text-5xl font-black text-center text-slate-800 mb-12">
-      🛍️ Productos a la Venta
-    </h1>
+      <div class="flex justify-between items-center mb-8">
 
-    <div class="max-w-md mx-auto mb-10">
-  <input
-    v-model="buscar"
-    type="text"
-    placeholder="🔍 Buscar producto..."
-    class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-  />
-</div>
+        <div>
+          <h1 class="text-5xl font-black text-slate-800">
+            Productos en Venta
+          </h1>
 
-    <div
-      class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-    >
-
-      <div
-        v-for="(producto, index) in productosFiltrados"
-        :key="index"
-        class="bg-white rounded-2xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl hover:-translate-y-2"
-      >
-
-        <!-- Imagen -->
-        <div class="overflow-hidden bg-gray-100">
-          <img
-            :src="producto.imagen"
-            :alt="producto.nombre"
-            class="w-full h-60 object-contain p-4 transition duration-500 hover:scale-110"
-          >
+          <p class="text-gray-500 mt-2">
+            Selecciona los productos que deseas comprar.
+          </p>
         </div>
 
-        <!-- Información -->
-        <div class="p-6">
+        <RouterLink to="/carrito"
+          class="relative bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl shadow-lg transition">
 
-          <h2 class="text-2xl font-bold text-slate-800">
-            {{ producto.nombre }}
-          </h2>
+          🛒 Carrito
 
-          <p class="text-3xl font-extrabold text-indigo-600 mt-3">
-            RD$ {{ producto.precio }}
-          </p>
+          <span v-if="cantidadCarrito > 0"
+            class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-7 h-7 flex items-center justify-center font-bold">
+            {{ cantidadCarrito }}
+          </span>
 
-          <div class="flex justify-between items-center mt-5">
+        </RouterLink>
 
-            <span
-              v-if="producto.stock > 0"
-              class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold"
-            >
-              Disponible
-            </span>
+      </div>
 
-            <span
-              v-else
-              class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold"
-            >
-              Agotado
-            </span>
+      <p class="text-center text-gray-500 text-lg mb-10">
+        Selecciona los productos que deseas comprar.
+      </p>
 
-            <span class="font-semibold text-gray-600">
-              Stock: {{ producto.stock }}
-            </span>
+      <div v-if="productos.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div v-for="(producto, index) in productos" :key="index"
+          class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300">
+
+          <img :src="producto.imagen || 'https://placehold.co/600x400?text=Sin+Imagen'" :alt="producto.nombre"
+            class="w-full h-56 object-contain bg-gray-100" />
+
+          <div class="p-6">
+
+            <h2 class="text-2xl font-bold text-slate-800">
+              {{ producto.nombre }}
+            </h2>
+
+            <p class="mt-3 text-lg text-indigo-600 font-bold">
+              $ {{ Number(producto.precio).toFixed(2) }}
+            </p>
+
+            <p class="text-gray-600 mt-2">
+              Stock disponible:
+              <span class="font-bold">{{ producto.stock }}</span>
+            </p>
+
+            <div class="mt-5">
+              <label class="block mb-2 font-semibold">
+                Cantidad
+              </label>
+
+              <input type="number" min="1" :max="producto.stock" v-model.number="cantidades[index]"
+                class="w-full border rounded-lg px-3 py-2" />
+            </div>
+
+            <button @click="agregarCarrito(producto, index)"
+              class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">
+              Agregar al carrito
+            </button>
 
           </div>
-
-          <button
-            class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition duration-300"
-          >
-            🛒 Agregar al carrito
-          </button>
 
         </div>
 
       </div>
 
-    </div>
+      <div v-else class="text-center py-20">
 
+        <h2 class="text-3xl font-bold text-gray-500">
+          No hay productos disponibles
+        </h2>
+
+        <p class="text-gray-400 mt-3">
+          Primero agrega productos desde el módulo de Productos.
+        </p>
+
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const productos = ref([])
-const buscar = ref('')
+const cantidades = ref([])
+const cantidadCarrito = computed(() => {
 
-const productosFiltrados = computed(() => {
-  return productos.value.filter(prod =>
-    prod.nombre.toLowerCase().includes(buscar.value.toLowerCase())
+  const carritoGuardado = JSON.parse(
+    localStorage.getItem("carrito") || "[]"
   )
+
+  return carritoGuardado.reduce(
+    (total, item) => total + Number(item?.cantidad || 0),
+    0
+  )
+
 })
 
 onMounted(() => {
-  productos.value = JSON.parse(localStorage.getItem('productos')) || []
+
+  productos.value =
+    JSON.parse(localStorage.getItem('productos')) || []
+
+  cantidades.value =
+    productos.value.map(() => 1)
+
 })
+
+function agregarCarrito(producto, index) {
+
+  const cantidad = cantidades.value[index]
+
+  if (cantidad < 1) {
+    alert("Cantidad inválida.")
+    return
+  }
+
+  if (cantidad > producto.stock) {
+    alert("No hay suficiente stock.")
+    return
+  }
+
+  const carrito =
+    JSON.parse(localStorage.getItem('carrito')) || []
+
+  const existente =
+    carrito.find(item => item.nombre === producto.nombre)
+
+  if (existente) {
+
+    if (existente.cantidad + cantidad > producto.stock) {
+      alert("No hay suficiente stock.")
+      return
+    }
+
+    existente.cantidad += cantidad
+
+  } else {
+
+    carrito.push({
+      ...producto,
+      cantidad
+    })
+
+  }
+
+  localStorage.setItem(
+    "carrito",
+    JSON.stringify(carrito)
+  )
+
+  alert("Producto agregado al carrito.")
+}
 </script>
+
+<style scoped></style>
