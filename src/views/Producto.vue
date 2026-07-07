@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-100 via-gray-100 to-indigo-100 py-10 px-6">
+  <div class="min-h-screen bg-gradient-to-br from-slate-100 via-gray-100 to-indigo-100 py-6 px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
-      <h1 class="text-6xl font-black text-center text-slate-800 mb-3">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-center text-slate-800 mb-3">
         Gestión de Productos
       </h1>
 

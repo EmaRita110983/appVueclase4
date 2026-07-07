@@ -2,55 +2,113 @@
   <div class="min-h-screen bg-slate-100 flex flex-col">
 
     <!-- NAVBAR -->
-    <nav class="bg-slate-900 shadow-lg sticky top-0 z-50">
+   <nav class="bg-slate-900 shadow-lg sticky top-0 z-50">
 
-      <div class="max-w-7xl mx-auto h-20 px-8 flex justify-between items-center">
+  <div class="max-w-7xl mx-auto px-4">
 
-        <!-- Logo -->
-        <RouterLink to="/" class="text-3xl font-extrabold tracking-wide text-white">
-          HM<span class="text-indigo-400">Technologies</span>
+    <div class="flex justify-between items-center h-20">
+
+      <!-- Logo -->
+      <RouterLink
+        to="/"
+        class="text-2xl md:text-3xl font-extrabold text-white"
+      >
+        HM<span class="text-indigo-400">Technologies</span>
+      </RouterLink>
+
+      <!-- Botón móvil -->
+      <button
+        @click="menuAbierto = !menuAbierto"
+        class="md:hidden text-white text-3xl"
+      >
+        ☰
+      </button>
+
+      <!-- Menú escritorio -->
+      <div class="hidden md:flex gap-4">
+
+        <RouterLink
+          to="/"
+          class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
+        >
+          Inicio
         </RouterLink>
 
-        <!-- Menú -->
-        <div class="flex gap-4 ">
+        <RouterLink
+          to="/login"
+          class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
+        >
+          Login
+        </RouterLink>
 
-          <RouterLink to="/"
-            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
-            active-class="bg-indigo-600 text-white shadow-lg">
-            Inicio
-          </RouterLink>
+        <RouterLink
+          to="/producto"
+          class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
+        >
+          Productos
+        </RouterLink>
 
-          <RouterLink to="/login"
-            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
-            active-class="bg-indigo-600 text-white shadow-lg">
-            Login
-          </RouterLink>
+        <RouterLink
+          to="/productos-venta"
+          class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
+        >
+          Ventas
+        </RouterLink>
 
-          <RouterLink to="/producto"
-            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
-            active-class="bg-indigo-600 text-white shadow-lg">
-            Productos
-          </RouterLink>
+        <RouterLink
+          to="/carrito"
+          class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
+        >
+          Carrito
+        </RouterLink>
 
-          <RouterLink to="/blog"
-            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
-            active-class="bg-indigo-600 text-white shadow-lg">
-            Blog
-          </RouterLink>
-
-          <RouterLink to="/productos-venta"
-            class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white transition"
-            active-class="bg-indigo-600 text-white shadow-lg">
-            Productos a la venta
-          </RouterLink>
-
-          
-
-        </div>
+        <RouterLink
+          to="/blog"
+          class="px-5 py-2 rounded-lg font-semibold text-gray-300 hover:bg-indigo-600 hover:text-white"
+        >
+          Blog
+        </RouterLink>
 
       </div>
 
-    </nav>
+    </div>
+
+    <!-- Menú móvil -->
+
+    <div
+      v-if="menuAbierto"
+      class="md:hidden pb-5 flex flex-col gap-3"
+    >
+
+      <RouterLink @click="menuAbierto=false" to="/" class="text-white">
+        Inicio
+      </RouterLink>
+
+      <RouterLink @click="menuAbierto=false" to="/login" class="text-white">
+        Login
+      </RouterLink>
+
+      <RouterLink @click="menuAbierto=false" to="/producto" class="text-white">
+        Productos
+      </RouterLink>
+
+      <RouterLink @click="menuAbierto=false" to="/productos-venta" class="text-white">
+        Productos Venta
+      </RouterLink>
+
+      <RouterLink @click="menuAbierto=false" to="/carrito" class="text-white">
+        Carrito
+      </RouterLink>
+
+      <RouterLink @click="menuAbierto=false" to="/blog" class="text-white">
+        Blog
+      </RouterLink>
+
+    </div>
+
+  </div>
+
+</nav>
 
     <!-- CONTENIDO -->
     <main class="flex-1">
@@ -83,9 +141,10 @@
   </div>
 </template>
 
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-//import { useCarrito } from './store/carrito'
 
-//const { carrito } = useCarrito()
+<script setup>
+import { ref } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+
+const menuAbierto = ref(false)
 </script>
